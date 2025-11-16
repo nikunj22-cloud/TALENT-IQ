@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}`, // /api add kar diya
+  baseURL: `${import.meta.env.VITE_API_URL}/api`, // /api add kar diya
   withCredentials: true,
 });
 
