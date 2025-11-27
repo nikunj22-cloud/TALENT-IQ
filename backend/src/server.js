@@ -49,12 +49,22 @@ console.log("✅ Session routes mounted");
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
 });
-
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Talent IQ API",
+    status: "running",
+    endpoints: {
+      health: "/health",
+      chat: "/api/chat",
+      sessions: "/api/sessions",
+    },
+  });
+});
 // make our app ready for deployment
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/{*any}", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
