@@ -37,8 +37,18 @@ function DashboardPage() {
       },
       {
         onSuccess: (data) => {
+          console.log("✅ Session created successfully:", data.session);
+          console.log("✅ Session ID:", data.session._id);
+          console.log("✅ Call ID:", data.session.callId);
+
           setShowCreateModal(false);
-          navigate(`/session/${data.session.callId}`);
+
+          // 🔥 FIX: Use _id instead of callId for navigation
+          navigate(`/session/${data.session._id}`);
+        },
+        onError: (error) => {
+          console.error("❌ Failed to create session:", error);
+          alert("Failed to create session. Please try again.");
         },
       }
     );
